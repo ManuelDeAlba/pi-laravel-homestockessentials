@@ -13,7 +13,7 @@ class ProductoController extends Controller
     public function index()
     {
         // return DB::table('producto')->get(); // Con Query Builder
-        return Producto::all(); // Eloquent
+        return view('productos/inicio', ['productos' => Producto::all()]);
     }
 
     /**
@@ -80,5 +80,7 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         $producto->delete();
+        
+        return redirect("/productos");
     }
 }
