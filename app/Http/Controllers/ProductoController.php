@@ -56,8 +56,8 @@ class ProductoController extends Controller
     public function show(Producto $producto)
     {
         // Regresa la vista solo con ese producto
-        // return view('productos/productos', ['productos' => [$producto]]);
-        return $producto; // Regresa el json con los datos del producto
+        return view('productos/productos', ['productos' => [$producto]]);
+        // return $producto; // Regresa el json con los datos del producto
     }
 
     /**
