@@ -5,36 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Editar producto</title>
+    @vite('resources/css/app.css')
 </head>
 <body>
-    <h1>Editar producto</h1>
+    <h1 class="text-2xl font-bold">Editar producto</h1>
     <form action="/productos/{{$producto->id}}" method="POST">
         @csrf
         @method("PUT")
         <div>
             <label for="nombre">Nombre:</label>
-            <input id="nombre" name="nombre" type="text" value="{{$producto->nombre}}" required>
+            <input class="input" id="nombre" name="nombre" type="text" value="{{$producto->nombre}}" required>
         </div>
 
         <div>
             <label for="precio_compra">Precio de compra:</label>
-            <input id="precio_compra" name="precio_compra" type="number" min="0" value="{{$producto->precio_compra}}" required>
+            <input class="input" id="precio_compra" name="precio_compra" type="number" min="0" value="{{$producto->precio_compra}}" required>
         </div>
 
         <div>
             <label for="precio_venta">Precio de venta:</label>
-            <input id="precio_venta" name="precio_venta" type="number" min="0" value="{{$producto->precio_venta}}" required>
+            <input class="input" id="precio_venta" name="precio_venta" type="number" min="0" value="{{$producto->precio_venta}}" required>
         </div>
 
         <div>
             <label for="cantidad">Cantidad:</label>
-            <input id="cantidad" name="cantidad" type="number" min="0" value="{{$producto->cantidad}}" required>
+            <input class="input" id="cantidad" name="cantidad" type="number" min="0" value="{{$producto->cantidad}}" required>
         </div>
 
         <div>
             <label for="categoria">Categoría:</label>
             {{--! Después las categorías vendrán de la DB --}}
-            <select id="categoria" name="categoria" required>
+            <select class="input" id="categoria" name="categoria" required>
                 <option value="" {{$producto->categoria == "" ? "selected" : ""}}>Todo</option>
                 <option value="cobija" {{$producto->categoria == "cobija" ? "selected" : ""}}>Cobija</option>
                 <option value="colcha" {{$producto->categoria == "colcha" ? "selected" : ""}}>Colcha</option>
@@ -48,7 +49,9 @@
             </select>
         </div>
 
-        <input type="submit" value="Editar">
+        <input class="boton" type="submit" value="Editar">
     </form>
+
+    <a class="boton" href="{{url()->previous()}}">Regresar</a>
 </body>
 </html>

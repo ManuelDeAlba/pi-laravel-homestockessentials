@@ -5,29 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Crear producto</title>
+    @vite('resources/css/app.css')
 </head>
 <body>
-    <h1>Crear producto</h1>
+    <h1 class="text-2xl font-bold">Crear producto</h1>
     <form action="/productos" method="POST">
         @csrf
         <div>
             <label for="nombre">Nombre:</label>
-            <input id="nombre" name="nombre" type="text" required>
+            <input class="input" id="nombre" name="nombre" type="text" required>
         </div>
 
         <div>
             <label for="precio_compra">Precio de compra:</label>
-            <input id="precio_compra" name="precio_compra" type="number" min="0" required>
+            <input class="input" id="precio_compra" name="precio_compra" type="number" min="0" required>
         </div>
 
         <div>
             <label for="precio_venta">Precio de venta:</label>
-            <input id="precio_venta" name="precio_venta" type="number" min="0" required>
+            <input class="input" id="precio_venta" name="precio_venta" type="number" min="0" required>
         </div>
 
         <div>
             <label for="categoria">Categoría:</label>
-            <select id="categoria" name="categoria" required>
+            <select class="input" id="categoria" name="categoria" required>
                 <option value="" selected="">Todo</option>
                 <option value="cobija">Cobija</option>
                 <option value="colcha">Colcha</option>
@@ -41,7 +42,9 @@
             </select>
         </div>
 
-        <input type="submit" value="Crear">
+        <input class="boton" type="submit" value="Crear">
     </form>
+
+    <a class="boton" href="{{url()->previous()}}">Regresar</a>
 </body>
 </html>

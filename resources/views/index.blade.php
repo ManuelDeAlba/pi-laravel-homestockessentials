@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home Stock Essentials</title>
+    @vite('resources/css/app.css')
 </head>
 <body>
-    <h1>Inicio</h1>
+    <h1 class="text-2xl font-bold">Inicio</h1>
     <ul>
         <li>
-            <a href='/productos'>Productos</a>
+            <a class="boton mb-1" href='/productos'>Productos</a>
         </li>
         <li>
-            <a href='/productos/create'>Crear producto</a>
+            <a class="boton mb-1" href='/productos/create'>Crear producto</a>
         </li>
         <li>
-            <a href='/productos/4/edit'>Editar producto 4</a>
+            <a class="boton mb-1" href='/productos/1/edit'>Editar producto 1</a>
         </li>
     </ul>
 </body>
