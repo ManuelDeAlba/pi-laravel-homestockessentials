@@ -13,7 +13,7 @@ class ProductoController extends Controller
     public function index()
     {
         // return DB::table('producto')->get(); // Con Query Builder
-        return view('productos/inicio', ['productos' => Producto::all()]);
+        return view('productos/productos', ['productos' => Producto::all()]);
     }
 
     /**
@@ -29,9 +29,17 @@ class ProductoController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {       
+    {
+        // Se validan los datos de la petición
+        $request->validate([
+            'nombre' => 'required|string',
+            'precio_compra' => 'required|numeric',
+            'precio_venta' => 'required|numeric',
+            'categoria' => 'required|string'
+        ]);
+
         // Se crea el objeto con los datos de la petición
-        $producto = new Producto;
+        $producto = new Producto();
         $producto->nombre = $request->nombre;
         $producto->precio_compra = $request->precio_compra;
         $producto->precio_venta = $request->precio_venta;
@@ -47,7 +55,9 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto)
     {
-        return $producto;
+        // Regresa la vista solo con ese producto
+        // return view('productos/productos', ['productos' => [$producto]]);
+        return $producto; // Regresa el json con los datos del producto
     }
 
     /**
@@ -56,7 +66,7 @@ class ProductoController extends Controller
     public function edit(Producto $producto)
     {
         // Se regresa una vista con el formulario
-        return view('productos/formularioEditarProducto', ['id' => $producto->id]);
+        return view('productos/formularioEditarProducto', ['producto' => $producto]);
     }
 
     /**
@@ -64,14 +74,24 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
+        $request->validate([
+            'nombre' => 'required|string',
+            'precio_compra' => 'required|numeric',
+            'precio_venta' => 'required|numeric',
+            'cantidad' => 'required|numeric',
+            'categoria' => 'required|string'
+        ]);
+
         $producto->nombre = $request->nombre;
         $producto->precio_compra = $request->precio_compra;
         $producto->precio_venta = $request->precio_venta;
+        $producto->cantidad = $request->cantidad;
         $producto->categoria = $request->categoria;
 
         $producto->save();
 
-        return redirect("/productos/$producto->id");
+        // return redirect("/productos/$producto->id");
+        return redirect("/productos");
     }
 
     /**

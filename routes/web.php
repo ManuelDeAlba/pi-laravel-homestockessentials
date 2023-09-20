@@ -15,8 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
-    return "Inicio<br><a href='/productos/create'>Crear producto</a><br><a href='/productos/4/edit'>Editar producto 4</a><br><a href='/productos'>Productos</a>";
+    return view('index');
 });
 
 Route::resource('productos', ProductoController::class);
