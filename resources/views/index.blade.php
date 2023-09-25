@@ -8,17 +8,14 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <h1 class="text-2xl font-bold">Inicio</h1>
-    <ul>
-        <li>
+    <main class="container mx-auto py-4 grid gap-2">
+        <h1 class="text-2xl text-center font-bold">Inicio</h1>
+        
+        <nav>
             <a class="boton mb-1" href='/productos'>Productos</a>
-        </li>
-        <li>
             <a class="boton mb-1" href='/productos/create'>Crear producto</a>
-        </li>
-        <li>
             <a class="boton mb-1" href='/productos/1/edit'>Editar producto 1</a>
-        </li>
-    </ul>
+        </nav>
+    </main>
 </body>
 </html>

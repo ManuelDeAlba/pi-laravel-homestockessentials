@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .boton{
-    @apply bg-blue-500 text-white inline-block px-2 py-1 hover:bg-blue-600
+    @apply bg-blue-500 text-white inline-block px-2 py-1 hover:bg-blue-600 text-center rounded-sm
 }
 .boton--rojo{
     @apply bg-red-500 hover:bg-red-600
