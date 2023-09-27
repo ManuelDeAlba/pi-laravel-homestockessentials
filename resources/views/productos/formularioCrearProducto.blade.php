@@ -9,6 +9,14 @@
 </head>
 <body>
     <main class="container mx-auto py-4 grid gap-2">
+
+        {{-- Se muestran los errores --}}
+        {{-- Cuando hay un error, los inputs se reinician, para eso se usa value="{{ old('name') }}" --}}
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
         
         <h1 class="text-2xl text-center font-bold">Crear producto</h1>
 
@@ -16,22 +24,22 @@
             @csrf
             <div class="grid grid-cols-[200px,1fr]">
                 <label for="nombre">Nombre:</label>
-                <input class="input" id="nombre" name="nombre" type="text" required>
+                <input class="input" id="nombre" name="nombre" value="{{ old('nombre') }}" type="text" required>
             </div>
 
             <div class="grid grid-cols-[200px,1fr]">
                 <label for="precio_compra">Precio de compra:</label>
-                <input class="input" id="precio_compra" name="precio_compra" type="number" min="0" required>
+                <input class="input" id="precio_compra" name="precio_compra" value="{{ old('precio_compra') }}" type="number" min="0" required>
             </div>
 
             <div class="grid grid-cols-[200px,1fr]">
                 <label for="precio_venta">Precio de venta:</label>
-                <input class="input" id="precio_venta" name="precio_venta" type="number" min="0" required>
+                <input class="input" id="precio_venta" name="precio_venta" value="{{ old('precio_venta') }}" type="number" min="0" required>
             </div>
 
             <div class="grid grid-cols-[200px,1fr]">
                 <label for="categoria">Categoría:</label>
-                <select class="input" id="categoria" name="categoria" required>
+                <select class="input" id="categoria" name="categoria" value="{{ old('categoria') }}" required>
                     <option value="" selected="">Todo</option>
                     <option value="cobija">Cobija</option>
                     <option value="colcha">Colcha</option>
