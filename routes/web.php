@@ -18,4 +18,5 @@ Route::get('/', function () {
     return view('index');
 });
 
+// Route::get('productos/pdf', [ProductoController::class, 'pdf'])->name('productos.pdf');
 Route::resource('productos', ProductoController::class);

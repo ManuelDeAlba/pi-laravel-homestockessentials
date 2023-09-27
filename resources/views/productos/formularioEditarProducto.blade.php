@@ -11,9 +11,9 @@
     <main class="container mx-auto py-4 grid gap-2">
         <h1 class="text-2xl text-center font-bold">Editar producto</h1>
 
-        <form class="flex flex-col gap-2" action="/productos/{{$producto->id}}" method="POST">
+        <form class="flex flex-col gap-2" action="{{ route('productos.update', $producto) }}" method="POST">
             @csrf
-            @method("PUT")
+            @method("PATCH")
             <div class="grid grid-cols-[200px,1fr]">
                 <label for="nombre">Nombre:</label>
                 <input class="input" id="nombre" name="nombre" type="text" value="{{$producto->nombre}}" required>
@@ -38,16 +38,16 @@
                 <label for="categoria">Categoría:</label>
                 {{--! Después las categorías vendrán de la DB --}}
                 <select class="input" id="categoria" name="categoria" required>
-                    <option value="" {{$producto->categoria == "" ? "selected" : ""}}>Todo</option>
-                    <option value="cobija" {{$producto->categoria == "cobija" ? "selected" : ""}}>Cobija</option>
-                    <option value="colcha" {{$producto->categoria == "colcha" ? "selected" : ""}}>Colcha</option>
-                    <option value="cortina" {{$producto->categoria == "cortina" ? "selected" : ""}}>Cortina</option>
-                    <option value="edredon" {{$producto->categoria == "edredon" ? "selected" : ""}}>Edredón</option>
-                    <option value="frazada" {{$producto->categoria == "frazada" ? "selected" : ""}}>Frazada</option>
-                    <option value="sabana" {{$producto->categoria == "sabana" ? "selected" : ""}}>Sábana</option>
-                    <option value="almohada" {{$producto->categoria == "almohada" ? "selected" : ""}}>Almohada</option>
-                    <option value="cojin" {{$producto->categoria == "cojin" ? "selected" : ""}}>Cojín</option>
-                    <option value="otros" {{$producto->categoria == "otros" ? "selected" : ""}}>Otros</option>
+                    <option value="" @selected($producto->categoria == "")>Todo</option>
+                    <option value="cobija" @selected($producto->categoria == "cobija")>Cobija</option>
+                    <option value="colcha" @selected($producto->categoria == "colcha")>Colcha</option>
+                    <option value="cortina" @selected($producto->categoria == "cortina")>Cortina</option>
+                    <option value="edredon" @selected($producto->categoria == "edredon")>Edredón</option>
+                    <option value="frazada" @selected($producto->categoria == "frazada")>Frazada</option>
+                    <option value="sabana" @selected($producto->categoria == "sabana")>Sábana</option>
+                    <option value="almohada" @selected($producto->categoria == "almohada")>Almohada</option>
+                    <option value="cojin" @selected($producto->categoria == "cojin")>Cojín</option>
+                    <option value="otros" @selected($producto->categoria == "otros")>Otros</option>
                 </select>
             </div>
 

@@ -12,7 +12,7 @@
         
         <h1 class="text-2xl text-center font-bold">Crear producto</h1>
 
-        <form class="flex flex-col gap-2" action="/productos" method="POST">
+        <form class="flex flex-col gap-2" action="{{ route('productos.index') }}" method="POST">
             @csrf
             <div class="grid grid-cols-[200px,1fr]">
                 <label for="nombre">Nombre:</label>

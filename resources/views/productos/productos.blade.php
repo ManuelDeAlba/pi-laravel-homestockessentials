@@ -13,6 +13,9 @@
         
         <nav>
             <a class="boton" href='/'>Inicio</a>
+            @if (count($productos) <= 1)
+                <a class="boton" href='/productos'>Productos</a>
+            @endif
             <a class="boton" href='/productos/create'>Crear producto</a>
         </nav>
         
@@ -28,9 +31,10 @@
                     </div>
         
                     <div class="flex gap-1">
-                        <a class="boton" href="/productos/{{$producto->id}}/edit">Editar</a>
+                        <a class="boton" href="{{ route('productos.edit', $producto) }}">Editar</a>
+                        <a href="{{ route('productos.show', $producto) }}" class="boton">Ver</a>
         
-                        <form action="/productos/{{$producto->id}}" method="POST">
+                        <form action="{{ route('productos.destroy', $producto) }}" method="POST">
                             @csrf
                             @method('DELETE')
         
