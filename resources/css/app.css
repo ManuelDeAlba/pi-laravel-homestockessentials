@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+[x-cloak] {
+    display: none;
+}
+
 .boton{
     @apply bg-blue-500 text-white inline-block px-2 py-1 hover:bg-blue-600 text-center rounded-sm
 }
