@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Crear producto</title>
-    @vite('resources/css/app.css')
-</head>
-<body>
-    <main class="container mx-auto py-4 grid gap-2">
+<x-layout titulo="Crear producto">
+    <div class="container mx-auto p-4 grid gap-2">
 
         {{-- Se muestran los errores --}}
         {{-- Cuando hay un error, los inputs se reinician, para eso se usa value="{{ old('name') }}" --}}
@@ -58,6 +49,5 @@
                 <a class="boton boton--rojo" href="{{url()->previous()}}">Cancelar</a>
             </div>
         </form>
-    </main>
-</body>
-</html>
+    </div>
+</x-layout>

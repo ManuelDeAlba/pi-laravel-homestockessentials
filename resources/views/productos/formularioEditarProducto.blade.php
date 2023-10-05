@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Editar producto</title>
-    @vite('resources/css/app.css')
-</head>
-<body>
-    <main class="container mx-auto py-4 grid gap-2">
+<x-layout titulo="Editar producto">
+    <div class="container mx-auto p-4 grid gap-2">
         <h1 class="text-2xl text-center font-bold">Editar producto</h1>
 
         {{-- Se muestran los errores --}}
@@ -64,6 +55,5 @@
                 <a class="boton boton--rojo" href="{{url()->previous()}}">Cancelar</a>
             </div>
         </form>
-    </main>
-</body>
-</html>
+    </div>
+</x-layout>
