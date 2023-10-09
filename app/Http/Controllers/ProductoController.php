@@ -32,7 +32,7 @@ class ProductoController extends Controller
     {
         // Se validan los datos de la petición
         $request->validate([
-            'nombre' => 'required|string',
+            'nombre' => 'required|string|min:5',
             'precio_compra' => 'required|numeric',
             'precio_venta' => 'required|numeric',
             'categoria' => 'required|string'
@@ -75,10 +75,10 @@ class ProductoController extends Controller
     public function update(Request $request, Producto $producto)
     {
         $request->validate([
-            'nombre' => 'required|string',
+            'nombre' => 'required|string|min:5',
             'precio_compra' => 'required|numeric',
             'precio_venta' => 'required|numeric',
-            'cantidad' => 'required|numeric',
+            'cantidad' => 'required|numeric|min:0',
             'categoria' => 'required|string'
         ]);
 
