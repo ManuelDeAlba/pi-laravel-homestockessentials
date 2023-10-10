@@ -39,21 +39,14 @@
             </div>
     
             <div class="grid grid-cols-[200px,1fr]">
-                <label for="categoria">Categoría:</label>
-                {{--! Después las categorías vendrán de la DB --}}
-                <select class="input" id="categoria" name="categoria" required>
-                    <option value="" @selected((old("categoria") ?? $producto->categoria) == "")>Todo</option>
-                    <option value="cobija" @selected((old("categoria") ?? $producto->categoria) == "cobija")>Cobija</option>
-                    <option value="colcha" @selected((old("categoria") ?? $producto->categoria) == "colcha")>Colcha</option>
-                    <option value="cortina" @selected((old("categoria") ?? $producto->categoria) == "cortina")>Cortina</option>
-                    <option value="edredon" @selected((old("categoria") ?? $producto->categoria) == "edredon")>Edredón</option>
-                    <option value="frazada" @selected((old("categoria") ?? $producto->categoria) == "frazada")>Frazada</option>
-                    <option value="sabana" @selected((old("categoria") ?? $producto->categoria) == "sabana")>Sábana</option>
-                    <option value="almohada" @selected((old("categoria") ?? $producto->categoria) == "almohada")>Almohada</option>
-                    <option value="cojin" @selected((old("categoria") ?? $producto->categoria) == "cojin")>Cojín</option>
-                    <option value="otros" @selected((old("categoria") ?? $producto->categoria) == "otros")>Otros</option>
+                <label for="categoria_id">Categoría:</label>
+                <select class="input" id="categoria_id" name="categoria_id">
+                    <option value="" @selected((old("categoria_id") ?? $producto->categoria->id) == "")>Todo</option>
+                    @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria->id }}" @selected((old("categoria_id") ?? $producto->categoria->id) == $categoria->id)>{{ $categoria->nombre }}</option>
+                    @endforeach
                 </select>
-                @error('categoria')
+                @error('categoria_id')
                     <p class="text-red-700 col-span-2">{{ $message }}</p>
                 @enderror
             </div>

@@ -15,11 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('nombre')->nullable(false);
             $table->string('img')->nullable(true);
-            $table->string('categoria')->nullable(false);
+            $table->unsignedBigInteger('categoria_id');
             $table->float('precio_compra')->nullable(false);
             $table->float('precio_venta')->nullable(false);
             $table->integer('cantidad')->default(0);
             $table->timestamps();
+            
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
+            // $table->foreignId('categoria_id')->constrained(); // Solo si se sigue el estandar
         });
     }
 

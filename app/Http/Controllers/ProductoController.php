@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,9 @@ class ProductoController extends Controller
      */
     public function create()
     {
+        $categorias = Categoria::all();
         // Se regresa una vista con el formulario
-        return view('productos/formularioCrearProducto');
+        return view('productos/formularioCrearProducto', compact('categorias'));
     }
 
     /**
@@ -35,7 +37,7 @@ class ProductoController extends Controller
             'nombre' => 'required|string|min:5',
             'precio_compra' => 'required|numeric',
             'precio_venta' => 'required|numeric',
-            'categoria' => 'required|string'
+            'categoria_id' => 'required|integer'
         ]);
 
         // Se crea el objeto con los datos de la petición
@@ -43,7 +45,7 @@ class ProductoController extends Controller
         $producto->nombre = $request->nombre;
         $producto->precio_compra = $request->precio_compra;
         $producto->precio_venta = $request->precio_venta;
-        $producto->categoria = $request->categoria;
+        $producto->categoria_id = $request->categoria_id;
 
         $producto->save();
 
@@ -65,8 +67,9 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
+        $categorias = Categoria::all();
         // Se regresa una vista con el formulario
-        return view('productos/formularioEditarProducto', ['producto' => $producto]);
+        return view('productos/formularioEditarProducto', ['producto' => $producto, 'categorias' => $categorias]);
     }
 
     /**
@@ -79,14 +82,14 @@ class ProductoController extends Controller
             'precio_compra' => 'required|numeric',
             'precio_venta' => 'required|numeric',
             'cantidad' => 'required|numeric|min:0',
-            'categoria' => 'required|string'
+            'categoria_id' => 'required|integer'
         ]);
 
         $producto->nombre = $request->nombre;
         $producto->precio_compra = $request->precio_compra;
         $producto->precio_venta = $request->precio_venta;
         $producto->cantidad = $request->cantidad;
-        $producto->categoria = $request->categoria;
+        $producto->categoria_id = $request->categoria_id;
 
         $producto->save();
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductoController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,8 @@ Route::get('/', function () {
 
 // Route::get('productos/pdf', [ProductoController::class, 'pdf'])->name('productos.pdf');
 Route::resource('productos', ProductoController::class);
+Route::resource('categorias', CategoriaController::class);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

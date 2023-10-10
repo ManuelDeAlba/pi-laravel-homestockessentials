@@ -4,7 +4,7 @@
         {{-- Cuando hay un error, los inputs se reinician, para eso se usa value="{{ old('name') }}" --}}        
         <h1 class="text-2xl text-center font-bold">Crear producto</h1>
 
-        <form class="flex flex-col gap-2" action="{{ route('productos.index') }}" method="POST">
+        <form class="flex flex-col gap-2" action="{{ route('productos.store') }}" method="POST">
             @csrf
             <div class="grid grid-cols-[200px,1fr]">
                 <label for="nombre">Nombre:</label>
@@ -31,20 +31,14 @@
             </div>
 
             <div class="grid grid-cols-[200px,1fr]">
-                <label for="categoria">Categoría:</label>
-                <select class="input" id="categoria" name="categoria" required>
-                    <option value="" @selected(old("categoria") == "")>Todo</option>
-                    <option value="cobija" @selected(old("categoria") == "cobija")>Cobija</option>
-                    <option value="colcha" @selected(old("categoria") == "colcha")>Colcha</option>
-                    <option value="cortina" @selected(old("categoria") == "cortina")>Cortina</option>
-                    <option value="edredon" @selected(old("categoria") == "edredon")>Edredón</option>
-                    <option value="frazada" @selected(old("categoria") == "frazada")>Frazada</option>
-                    <option value="sabana" @selected(old("categoria") == "sabana")>Sábana</option>
-                    <option value="almohada" @selected(old("categoria") == "almohada")>Almohada</option>
-                    <option value="cojin" @selected(old("categoria") == "cojin")>Cojín</option>
-                    <option value="otros" @selected(old("categoria") == "otros")>Otros</option>
+                <label for="categoria_id">Categoría:</label>
+                <select class="input" id="categoria_id" name="categoria_id" required>
+                    <option value="" @selected(old("categoria_id") == "")>Todo</option>
+                    @foreach ($categorias as $categoria)
+                        <option value="{{ $categoria->id }}" @selected(old("categoria_id") == $categoria->id)>{{ $categoria->nombre }}</option>
+                    @endforeach
                 </select>
-                @error('categoria')
+                @error('categoria_id')
                     <p class="text-red-700 col-span-2">{{ $message }}</p>
                 @enderror
             </div>
