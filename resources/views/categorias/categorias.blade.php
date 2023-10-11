@@ -8,6 +8,7 @@
                     <div class="flex flex-col gap-1">
                         <h2 class="text-lg font-bold flex-grow">{{$indice + 1}}) {{$categoria->nombre}}</h2>
                         <p class="text-gray-400"><b>ID:</b> {{$categoria->id}}</p>
+                        <p class="text-gray-400"><b>Productos:</b> {{count($categoria->productos)}}</p>
                     </div>
         
                     <div class="flex gap-1">
@@ -26,6 +27,18 @@
                     </div>
                 </div>
             @endforeach
+        </div>
+
+        <div class="space-y-4">
+            @if (count($categorias) == 1)
+                <h3 class="text-gray-800 font-bold">Productos relacionados:</h3>
+                @foreach ($categorias[0]->productos as $indice => $producto)
+                    <div class="grid grid-cols-[50%,max-content] gap-4">
+                        <span class="text-gray-800"><b>{{$indice + 1}})</b> {{$producto->nombre}}</span>
+                        <a class="boton self-start" href="{{route('productos.show', $producto)}}">Ver</a>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 </x-layout>

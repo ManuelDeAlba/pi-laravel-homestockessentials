@@ -7,7 +7,7 @@
 }
 
 .boton{
-    @apply bg-blue-500 text-white inline-block px-2 py-1 hover:bg-blue-600 text-center rounded-sm
+    @apply bg-blue-500 text-white px-2 py-1 hover:bg-blue-600 text-center flex items-center justify-center rounded-sm
 }
 .boton--rojo{
     @apply bg-red-500 hover:bg-red-600
