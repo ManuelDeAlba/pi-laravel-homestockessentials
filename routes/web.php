@@ -20,8 +20,17 @@ Route::get('/', function () {
 });
 
 // Route::get('productos/pdf', [ProductoController::class, 'pdf'])->name('productos.pdf');
+
+// Para poner un middleware "Route::resource('categorias', CategoriaController::class)->middleware('auth')"
+// También se puede crear un grupo con el middleware
+// Route::middleware('auth')->group(function(){
+//     Route::resource('categorias', CategoriaController::class);
+//     Route::resource('productos', ProductoController::class);
+// });
+// O también se puede declarar a nivel de controlador con public function __construct(){ $this->middleware('auth'); }
+
+Route::resource('categorias', CategoriaController::class)->middleware('auth');
 Route::resource('productos', ProductoController::class);
-Route::resource('categorias', CategoriaController::class);
 
 Route::middleware([
     'auth:sanctum',

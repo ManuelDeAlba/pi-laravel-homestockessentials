@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
+    // Aquí se aplica el middleware y se especifican las rutas a excluir
+    public function __construct(){
+        // $this->middleware('auth')->only([]);
+        $this->middleware('auth')->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      */
