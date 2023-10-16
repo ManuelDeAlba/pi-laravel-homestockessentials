@@ -40,14 +40,10 @@ class ProductoController extends Controller
             'categoria_id' => 'required|integer'
         ]);
 
-        // Se crea el objeto con los datos de la petición
-        $producto = new Producto();
-        $producto->nombre = $request->nombre;
-        $producto->precio_compra = $request->precio_compra;
-        $producto->precio_venta = $request->precio_venta;
-        $producto->categoria_id = $request->categoria_id;
-
-        $producto->save();
+        // Se obtiene el objeto con los datos de la request
+        // Los name de los input deben ser iguales a los campos de la tabla
+        // Para usar mass assignment se tiene que especificar en el modelo las columnas que se van a permitir inyectar de esta forma
+        $producto = Producto::create($request->all());
 
         return redirect('/productos');
     }
@@ -85,13 +81,10 @@ class ProductoController extends Controller
             'categoria_id' => 'required|integer'
         ]);
 
-        $producto->nombre = $request->nombre;
-        $producto->precio_compra = $request->precio_compra;
-        $producto->precio_venta = $request->precio_venta;
-        $producto->cantidad = $request->cantidad;
-        $producto->categoria_id = $request->categoria_id;
-
-        $producto->save();
+        // Para la actualización también tenemos que quitar el token y el method pero ya no se utiliza el $fillable del modelo
+        // También se puede usar $request->only() para seleccionar solo algunos campos
+        // $producto->update($request->except('_token', '_method')); // Eloquent (esta forma no cambia la cantidad)
+        Producto::where('id', $producto->id)->update($request->except('_token', '_method')); // Query builder
 
         // return redirect("/productos/$producto->id");
         return redirect("/productos");

@@ -9,6 +9,7 @@ class Categoria extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nombre'];
     public $timestamps = false;
 
     public function productos(){

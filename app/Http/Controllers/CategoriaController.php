@@ -35,9 +35,7 @@ class CategoriaController extends Controller
         ]);
         
         // Se guarda la categoría en la base de datos
-        $categoria = new Categoria();
-        $categoria->nombre = $request->nombre;
-        $categoria->save();
+        Categoria::create($request->all());
 
         return redirect('/categorias');
     }
