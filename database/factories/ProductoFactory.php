@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Categoria;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 
@@ -24,8 +25,10 @@ class ProductoFactory extends Factory
         // Se genera la categoría, es del 1 al 9 porque son las ID de las categorias manuales en CategoriaSeeder
         $categoria_id = fake()->numberBetween(1, 9);
         $nombre = Categoria::find($categoria_id)->nombre . " ejemplo";
+        $user_ids = User::pluck('id')->toArray();
 
         return [
+            'user_id' => fake()->randomElement($user_ids),
             'nombre' => $nombre,
             'img' => fake()->imageUrl(),
             'categoria_id' => $categoria_id,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductoController extends Controller
 {
@@ -20,7 +21,12 @@ class ProductoController extends Controller
     public function index()
     {
         // return DB::table('producto')->get(); // Con Query Builder
-        return view('productos/productos', ['productos' => Producto::all()]);
+        
+        // Si quisieramos filtrar los productos por creador
+        // $productos = Producto::where('user_id', Auth::id())->get();
+
+        $productos = Producto::all();
+        return view('productos/productos', ['productos' => $productos]);
     }
 
     /**
@@ -49,7 +55,17 @@ class ProductoController extends Controller
         // Se obtiene el objeto con los datos de la request
         // Los name de los input deben ser iguales a los campos de la tabla
         // Para usar mass assignment se tiene que especificar en el modelo las columnas que se van a permitir inyectar de esta forma
-        $producto = Producto::create($request->all());
+        $request->merge(['user_id' => Auth::id()]); // Se le agrega al request el id del usuario con la sesión activa
+        Producto::create($request->all());
+
+        // $producto = new Producto();
+        // $producto->user_id = Auth::id(); // Se obtiene el id del usuario con la sesión activa
+        // $producto->nombre = $request->nombre;
+        // $producto->precio_compra = $request->precio_compra;
+        // $producto->precio_venta = $request->precio_venta;
+        // $producto->categoria_id = $request->categoria_id;
+
+        // $producto->save();
 
         return redirect('/productos');
     }

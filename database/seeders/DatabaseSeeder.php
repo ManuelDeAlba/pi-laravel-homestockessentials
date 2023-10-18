@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         // Llama a todos los seeders que se establezcan aquí para solo usar un comando
         // php artisan db:seed --class DatabaseSeeder
         $this->call([
+            UserSeeder::class,
             CategoriaSeeder::class,
             ProductoSeeder::class
         ]);

@@ -16,6 +16,7 @@ class ProductoSeeder extends Seeder
     {
         // Opción 1 (eloquent)
         $producto = new Producto();
+        $producto->user_id = 1;
         $producto->nombre = "Ejemplo eloquent";
         $producto->precio_compra = 100;
         $producto->precio_venta = 200;
@@ -24,6 +25,7 @@ class ProductoSeeder extends Seeder
 
         // Opción 2 (query builder)
         DB::table('productos')->insert([
+            'user_id' => 1,
             'nombre' => "Ejemplo query builder",
             'precio_compra' => 100,
             'precio_venta' => 200,

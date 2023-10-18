@@ -11,6 +11,7 @@
                         <p class="text-gray-400"><b>Precio venta:</b> {{$producto->precio_venta}}</p>
                         <p class="text-gray-400"><b>Cantidad:</b> {{$producto->cantidad}}</p>
                         <p class="text-gray-400"><b>Categoría:</b> {{$producto->categoria->nombre}}</p>
+                        <p class="text-gray-400"><b>Creador:</b> {{$producto->user ? $producto->user->name : "Anónimo"}}</p>
                     </div>
         
                     <div class="flex gap-1">

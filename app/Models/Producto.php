@@ -10,10 +10,14 @@ class Producto extends Model
     use HasFactory;
 
     // Para permitir mass assignment
-    protected $fillable = ['nombre', 'precio_compra', 'precio_venta', 'categoria_id'];
+    protected $fillable = ['user_id', 'nombre', 'precio_compra', 'precio_venta', 'categoria_id'];
     // protected $guarded = ['_token']; // Lo opuesto a fillable, en este caso no aceptamos que se mande _token
 
     public function categoria(){
         return $this->belongsTo(Categoria::class);
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }
