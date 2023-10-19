@@ -59,7 +59,11 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function productos(){
+    public function productosCreados(){
         return $this->hasMany(Producto::class);
+    }
+
+    public function productosComprados(){
+        return $this->belongsToMany(Producto::class, 'compras')->withPivot('cantidad');
     }
 }
