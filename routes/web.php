@@ -42,7 +42,7 @@ Route::get('/compras', function () {
     $compras = $usuario->productosComprados;
 
     return view("compras/compras", compact('compras'));
-})->name('compras');
+})->name('compras')->middleware('auth');
 
 Route::middleware([
     'auth:sanctum',
