@@ -7,8 +7,11 @@
                 <div class="bg-gray-900 text-white p-4 grid grid-rows-[1fr_max-content] gap-4 rounded-sm">
                     <div class="flex flex-col gap-1">
                         <h2 class="text-lg font-bold flex-grow">{{$compra->id}}) {{$compra->nombre}}</h2>
-                        <p class="text-gray-400"><b>Cantidad:</b> {{$compra->pivot->cantidad}}</p>
-                        <p class="text-gray-400"><b>Precio:</b> ${{$compra->pivot->cantidad * $compra->precio_venta}}</p>
+                        <p class="text-gray-400"><b>Cantidad:</b> {{$compra->cantidad}}</p>
+                        <p class="text-gray-400"><b>Precio:</b> ${{$compra->cantidad * $compra->precio_venta}}</p>
+                        @if (count($compras) > 1)
+                            <a class="boton self-start" href="/compras/{{$compra->compra_id}}">Ver</a>
+                        @endif
                     </div>
                 </div>
             @endforeach

@@ -36,13 +36,10 @@ Route::get('/', function () {
 Route::resource('categorias', CategoriaController::class)->middleware('auth');
 Route::resource('productos', ProductoController::class);
 
-Route::get('/compras', function () {
-    // Se obtienen los productos que compró el usuario actual
-    $usuario = User::where('id', Auth::id())->get()[0];
-    $compras = $usuario->productosComprados;
-
-    return view("compras/compras", compact('compras'));
-})->name('compras')->middleware('auth');
+Route::middleware('auth')->group(function(){
+    Route::resource('compras', CompraController::class);
+    Route::get('compras/create/{producto_id}', [CompraController::class, 'createWithProductId'])->name('compras.createWithProductId');
+});
 
 Route::middleware([
     'auth:sanctum',

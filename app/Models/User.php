@@ -64,6 +64,6 @@ class User extends Authenticatable
     }
 
     public function productosComprados(){
-        return $this->belongsToMany(Producto::class, 'compras')->withPivot('cantidad');
+        return $this->belongsToMany(Producto::class, 'compras')->withPivot('id', 'cantidad');
     }
 }

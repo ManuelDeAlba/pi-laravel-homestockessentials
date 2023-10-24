@@ -24,7 +24,7 @@ class CompraFactory extends Factory
         return [
             'producto_id' => fake()->randomElement($productos_ids),
             'user_id' => fake()->randomElement($usuarios_ids),
-            'cantidad' => fake()->numberBetween(0, 10)
+            'cantidad' => fake()->numberBetween(1, 10)
         ];
     }
 }
