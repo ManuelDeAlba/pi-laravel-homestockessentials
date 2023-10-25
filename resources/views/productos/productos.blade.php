@@ -22,7 +22,7 @@
                         @auth
                             <a class="boton grow" href="{{ route('compras.createWithProductId', $producto->id) }}">Comprar</a>
 
-                            @if (auth()->id() == $producto->id)
+                            @if (auth()->id() == $producto->user_id)
                                 <a class="boton grow" href="{{ route('productos.edit', $producto) }}">Editar</a>
                 
                                 <form class="flex grow" action="{{ route('productos.destroy', $producto) }}" method="POST">
