@@ -14,19 +14,26 @@
                         <p class="text-gray-400"><b>Creador:</b> {{$producto->user ? $producto->user->name : "Anónimo"}}</p>
                     </div>
         
-                    <div class="flex gap-1">
-                        <a class="boton" href="{{ route('productos.edit', $producto) }}">Editar</a>
-
+                    <div class="flex flex-wrap gap-1">
                         @if (count($productos) > 1)
-                            <a href="{{ route('productos.show', $producto) }}" class="boton">Ver</a>
+                            <a href="{{ route('productos.show', $producto) }}" class="boton grow">Ver</a>
                         @endif
-        
-                        <form action="{{ route('productos.destroy', $producto) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-        
-                            <input class="boton boton--rojo" type="submit" value="Borrar">
-                        </form>
+
+                        @auth
+                            <a class="boton grow" href="{{ route('compras.createWithProductId', $producto->id) }}">Comprar</a>
+
+                            @if (auth()->id() == $producto->id)
+                                <a class="boton grow" href="{{ route('productos.edit', $producto) }}">Editar</a>
+                
+                                <form class="flex grow" action="{{ route('productos.destroy', $producto) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                
+                                    <input class="boton boton--rojo w-full" type="submit" value="Borrar">
+                                </form>
+                            @endif
+
+                        @endauth
                     </div>
                 </div>
             @endforeach
