@@ -23,6 +23,8 @@ return new class extends Migration
             
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             // $table->foreignId('categoria_id')->constrained(); // Solo si se sigue el estandar
+            
+            $table->softDeletes();
         });
     }
 
