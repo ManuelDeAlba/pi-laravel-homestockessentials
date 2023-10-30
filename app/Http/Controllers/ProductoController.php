@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProductoController extends Controller
 {
@@ -83,8 +84,21 @@ class ProductoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Producto $producto)
+    public function edit(Request $request, Producto $producto)
     {
+        // Usar el gate para verificar permisos y no darle permisos de abrir el formulario si no está permitido
+        // if(!Gate::allows('editar-producto', $producto)){
+        //     abort(403);
+        // }
+
+        // Con policy (se puede usar cannot o can con negacion !)
+        if($request->user()->cannot('update', $producto)){
+            abort(403);
+        }
+
+        // También con policy
+        $this->authorize('update', $producto);
+
         $categorias = Categoria::all();
         // Se regresa una vista con el formulario
         return view('productos/formularioEditarProducto', ['producto' => $producto, 'categorias' => $categorias]);
@@ -117,6 +131,8 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        $this->authorize('delete', $producto);
+
         $producto->delete();
         
         return redirect("/productos");

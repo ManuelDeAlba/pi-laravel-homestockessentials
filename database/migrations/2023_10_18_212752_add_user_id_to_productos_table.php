@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::table('productos', function (Blueprint $table) {
             // En lugar de usar create, accede a la tabla y le agregamos el id del usuario
             // Si estuviera en producción, no podría agregarla como llave foránea por el error de integridad referencial
+            // El after es para la posición dentro de la tabla (después de id)
             $table->unsignedBigInteger('user_id')->after('id');
         });
     }

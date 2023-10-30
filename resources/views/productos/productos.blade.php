@@ -21,9 +21,13 @@
                         @endif
 
                         @auth
-                            <a class="boton grow" href="{{ route('compras.createWithProductId', $producto->id) }}">Comprar</a>
+                            @can('comprar', $producto)
+                                <a class="boton grow" href="{{ route('compras.createWithProductId', $producto->id) }}">Comprar</a>
+                            @endcan
 
-                            @if (auth()->id() == $producto->user_id)
+                            {{-- @if (auth()->id() == $producto->user_id) --}}
+                            {{-- @endif --}}
+                            @can('delete', $producto)
                                 <a class="boton grow" href="{{ route('productos.edit', $producto) }}">Editar</a>
                 
                                 <form class="flex grow" action="{{ route('productos.destroy', $producto) }}" method="POST">
@@ -32,7 +36,7 @@
                 
                                     <input class="boton boton--rojo w-full" type="submit" value="Borrar">
                                 </form>
-                            @endif
+                            @endcan
 
                         @endauth
                     </div>
