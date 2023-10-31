@@ -1,6 +1,6 @@
 <x-layout titulo="Compras">
     <div class="container mx-auto p-4 grid gap-2">
-        <h1 class="text-2xl text-center font-bold mb-4">{{count($compras) > 1 ? "Mis compras" : "Mi compra"}}</h1>
+        <h1 class="text-2xl text-center font-bold mb-4">{{count($compras) == 1 ? "Mi compra" : "Mis compras"}}</h1>
         
         <div class="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-5">
             @foreach ($compras as $compra)

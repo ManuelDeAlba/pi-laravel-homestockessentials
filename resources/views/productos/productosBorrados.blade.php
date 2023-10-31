@@ -1,6 +1,6 @@
-<x-layout titulo="Productos">
+<x-layout titulo="Mis productos borrados">
     <div class="container mx-auto p-4 grid gap-2">
-        <h1 class="text-2xl text-center font-bold mb-4">{{count($productos) == 1 ? "Producto" : "Productos"}}</h1>
+        <h1 class="text-2xl text-center font-bold mb-4">{{count($productos) == 1 ? "Mi producto borrado" : "Mis productos borrados"}}</h1>
         
         <div class="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-5">
             @foreach ($productos as $producto)
@@ -20,25 +20,22 @@
                             <a href="{{ route('productos.show', $producto) }}" class="boton grow">Ver</a>
                         @endif
 
-                        @auth
-                            @can('comprar', $producto)
-                                <a class="boton grow" href="{{ route('compras.createWithProductId', $producto->id) }}">Comprar</a>
-                            @endcan
+                        {{-- auth? --}}
+                        @can('restore', $producto)
+                            <form action="{{ route('productos.restore', $producto->id) }}" method="POST">
+                                @csrf
 
-                            {{-- @if (auth()->id() == $producto->user_id) --}}
-                            {{-- @endif --}}
-                            @can('delete', $producto)
-                                <a class="boton grow" href="{{ route('productos.edit', $producto) }}">Editar</a>
-                
-                                <form class="flex grow" action="{{ route('productos.destroy', $producto) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                
-                                    <input class="boton boton--rojo w-full" type="submit" value="Borrar">
-                                </form>
-                            @endcan
-
-                        @endauth
+                                <input class="boton grow" type="submit" value="Restablecer">
+                            </form>
+                        @endcan
+                    
+                        @can('forceDelete', $producto)
+                            <form action="{{ route('productos.forceDelete', $producto->id) }}" method="POST">
+                                @csrf
+                                
+                                <input class="boton boton--rojo grow" type="submit" value="Borrar definitivamente">
+                            </form>
+                        @endcan
                     </div>
                 </div>
             @endforeach

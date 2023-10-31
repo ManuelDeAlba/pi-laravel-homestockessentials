@@ -34,11 +34,15 @@ Route::get('/', function () {
 // O también se puede declarar a nivel de controlador con public function __construct(){ $this->middleware('auth'); }
 
 Route::resource('categorias', CategoriaController::class)->middleware('auth');
+
+Route::get('productos/borrados', [ProductoController::class, 'indexBorrados'])->name('productos.indexBorrados');
+Route::post('productos/restablecer/{producto_id}', [ProductoController::class, 'restore'])->name('productos.restore');
+Route::post('productos/borrar/{producto_id}', [ProductoController::class, 'forceDelete'])->name('productos.forceDelete');
 Route::resource('productos', ProductoController::class);
 
 Route::middleware('auth')->group(function(){
-    Route::resource('compras', CompraController::class);
     Route::get('compras/create/{producto_id}', [CompraController::class, 'createWithProductId'])->name('compras.createWithProductId');
+    Route::resource('compras', CompraController::class);
 });
 
 Route::middleware([

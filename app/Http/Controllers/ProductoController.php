@@ -137,4 +137,30 @@ class ProductoController extends Controller
         
         return redirect("/productos");
     }
+
+    public function indexBorrados(){
+        $borrados = Producto::onlyTrashed()->get();
+        
+        return view('productos/productosBorrados', ['productos' => $borrados]);
+    }
+
+    public function restore($id){
+        $producto = Producto::onlyTrashed()->where('id', $id)->get()[0];
+        
+        $this->authorize('restore', $producto);
+
+        $producto->restore();
+
+        return redirect("/productos");
+    }
+
+    public function forceDelete($id){
+        $producto = Producto::onlyTrashed()->where('id', $id)->get()[0];
+        
+        $this->authorize('forceDelete', $producto);
+
+        $producto->forceDelete();
+
+        return redirect("/productos");
+    }
 }
