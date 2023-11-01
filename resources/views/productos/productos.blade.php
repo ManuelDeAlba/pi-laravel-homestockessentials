@@ -6,7 +6,7 @@
             @foreach ($productos as $producto)
                 <div class="bg-gray-900 text-white p-4 grid grid-rows-[1fr_max-content] gap-4 rounded-sm">
                     <div class="flex flex-col gap-1">
-                        <img class="w-full object-cover object-center h-[200px] mb-4" src="{{$producto->img ? $producto->img : 'assets/placeholder-producto.png'}}" alt="Imagen del producto">
+                        <img class="w-full object-cover object-center h-[200px] mb-4" src="{{$producto->img ? $producto->img : '/assets/placeholder-producto.png'}}" alt="Imagen del producto">
                         <h2 class="text-lg font-bold">{{$producto->id}}) {{$producto->nombre}}</h2>
                         <p class="text-gray-400"><b>Precio compra:</b> {{$producto->precio_compra}}</p>
                         <p class="text-gray-400"><b>Precio venta:</b> {{$producto->precio_venta}}</p>
