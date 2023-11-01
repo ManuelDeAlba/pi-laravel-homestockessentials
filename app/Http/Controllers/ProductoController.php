@@ -26,7 +26,8 @@ class ProductoController extends Controller
         // Si quisieramos filtrar los productos por creador
         // $productos = Producto::where('user_id', Auth::id())->get();
 
-        $productos = Producto::all();
+        // Eager loading (with y la relacion que tiene que cargar (método dentro de Producto))
+        $productos = Producto::with("categoria", "user")->get();
         return view('productos/productos', ['productos' => $productos]);
     }
 
