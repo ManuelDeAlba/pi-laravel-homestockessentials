@@ -7,6 +7,7 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -131,7 +132,20 @@ class ProductoController extends Controller
         // Para la actualización también tenemos que quitar el token y el method pero ya no se utiliza el $fillable del modelo
         // También se puede usar $request->only() para seleccionar solo algunos campos
         // $producto->update($request->except('_token', '_method')); // Eloquent (esta forma no cambia la cantidad)
-        Producto::where('id', $producto->id)->update($request->except('_token', '_method')); // Query builder
+        Producto::where('id', $producto->id)->update($request->except('_token', '_method', 'img')); // Query builder
+
+        // Se borra la imagen anterior
+        $prod = Producto::find($producto->id);
+        Storage::disk('public')->delete($producto->img);
+
+        // Se guarda la nueva imagen
+        if($request->file('img')->isValid()){
+            // Se puede poner cualquier nombre de carpeta pero si la ponemos en public es accesible por el navegador
+            $path = $request->file('img')->store("public/img-productos");
+
+            $prod->img = $path;
+            $prod->save();
+        }
 
         // return redirect("/productos/$producto->id");
         return redirect("/productos");

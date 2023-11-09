@@ -3,7 +3,7 @@
         <h1 class="text-2xl text-center font-bold">Editar producto</h1>
 
         {{-- Cuando hay un error, los inputs se reinician, para eso se usa value="{{ old('name') }}" es el valor con el que se generó el error --}}
-        <form class="flex flex-col gap-2" action="{{ route('productos.update', $producto) }}" method="POST">
+        <form class="flex flex-col gap-2" action="{{ route('productos.update', $producto) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method("PATCH")
             <div class="grid grid-cols-[200px,1fr]">
@@ -34,6 +34,14 @@
                 <label for="cantidad">Cantidad:</label>
                 <input class="input" id="cantidad" name="cantidad" type="number" min="0" value="{{ old('cantidad') ?? $producto->cantidad}}" required>
                 @error('cantidad')
+                    <p class="text-red-700 col-span-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="grid grid-cols-[200px,1fr]">
+                <label for="img">Imagen:</label>
+                <input class="input" id="img" name="img" type="file" accept="image/*">
+                @error('img')
                     <p class="text-red-700 col-span-2">{{ $message }}</p>
                 @enderror
             </div>
