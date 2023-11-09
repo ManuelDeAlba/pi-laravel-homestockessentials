@@ -63,7 +63,7 @@ class ProductoController extends Controller
 
         // El archivo por ahora está guardado en una carpeta temporal del servidor
         // Para eso tenemos que decidir que hacer con el archivo
-        if($request->file('img')->isValid()){
+        if($request->img && $request->file('img')->isValid()){
             // Se puede poner cualquier nombre de carpeta pero si la ponemos en public es accesible por el navegador
             $path = $request->file('img')->store("public/img-productos");
 
@@ -80,7 +80,7 @@ class ProductoController extends Controller
 
         // $producto->save();
 
-        return redirect('/productos');
+        return redirect('/productos')->with("message", "Producto creado");
     }
 
     /**
@@ -136,10 +136,13 @@ class ProductoController extends Controller
 
         // Se borra la imagen anterior
         $prod = Producto::find($producto->id);
-        Storage::disk('public')->delete($producto->img);
+
+        if($producto->img){
+            Storage::disk('public')->delete($producto->img);
+        }
 
         // Se guarda la nueva imagen
-        if($request->file('img')->isValid()){
+        if($request->img && $request->file('img')->isValid()){
             // Se puede poner cualquier nombre de carpeta pero si la ponemos en public es accesible por el navegador
             $path = $request->file('img')->store("public/img-productos");
 
@@ -148,7 +151,7 @@ class ProductoController extends Controller
         }
 
         // return redirect("/productos/$producto->id");
-        return redirect("/productos");
+        return redirect("/productos")->with("message", "Producto editado");
     }
 
     /**
@@ -160,7 +163,7 @@ class ProductoController extends Controller
 
         $producto->delete();
         
-        return redirect("/productos");
+        return redirect("/productos")->with("message", "Producto eliminado");
     }
 
     public function indexBorrados(){
