@@ -58,7 +58,17 @@ class ProductoController extends Controller
         // Los name de los input deben ser iguales a los campos de la tabla
         // Para usar mass assignment se tiene que especificar en el modelo las columnas que se van a permitir inyectar de esta forma
         $request->merge(['user_id' => Auth::id()]); // Se le agrega al request el id del usuario con la sesión activa
-        Producto::create($request->all());
+        $producto = Producto::create($request->all());
+
+        // El archivo por ahora está guardado en una carpeta temporal del servidor
+        // Para eso tenemos que decidir que hacer con el archivo
+        if($request->file('img')->isValid()){
+            // Se puede poner cualquier nombre de carpeta pero si la ponemos en public es accesible por el navegador
+            $path = $request->file('img')->store("public/img-productos");
+
+            $producto->img = $path;
+            $producto->save();
+        }
 
         // $producto = new Producto();
         // $producto->user_id = Auth::id(); // Se obtiene el id del usuario con la sesión activa
@@ -162,6 +172,6 @@ class ProductoController extends Controller
 
         $producto->forceDelete();
 
-        return redirect("/productos");
+        return redirect("/productos/borrados");
     }
 }

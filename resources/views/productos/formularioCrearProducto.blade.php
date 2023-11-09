@@ -4,7 +4,8 @@
         {{-- Cuando hay un error, los inputs se reinician, para eso se usa value="{{ old('name') }}" --}}        
         <h1 class="text-2xl text-center font-bold">Crear producto</h1>
 
-        <form class="flex flex-col gap-2" action="{{ route('productos.store') }}" method="POST">
+        {{-- El enctype divide los archivos en varias partes --}}
+        <form class="flex flex-col gap-2" action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="grid grid-cols-[200px,1fr]">
                 <label for="nombre">Nombre:</label>
@@ -26,6 +27,14 @@
                 <label for="precio_venta">Precio de venta:</label>
                 <input class="input" id="precio_venta" name="precio_venta" value="{{ old('precio_venta') }}" type="number" min="0" required>
                 @error('precio_venta')
+                    <p class="text-red-700 col-span-2">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div class="grid grid-cols-[200px,1fr]">
+                <label for="img">Imagen:</label>
+                <input class="input" id="img" name="img" type="file" accept="image/*">
+                @error('img')
                     <p class="text-red-700 col-span-2">{{ $message }}</p>
                 @enderror
             </div>
